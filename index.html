@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MusicHub</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background:#0f172a;
+      color:white;
+    }
+
+    /* HEADER */
+    header{
+      background:#111827;
+      padding:20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      position:sticky;
+      top:0;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:bold;
+      color:#38bdf8;
+    }
+
+    .search-box{
+      margin-top:10px;
+    }
+
+    .search-box input{
+      padding:12px;
+      width:280px;
+      border:none;
+      border-radius:8px;
+      outline:none;
+      font-size:16px;
+    }
+
+    /* HERO SECTION */
+    .hero{
+      text-align:center;
+      padding:60px 20px;
+      background:linear-gradient(to right,#1e3a8a,#2563eb);
+    }
+
+    .hero h1{
+      font-size:48px;
+      margin-bottom:15px;
+    }
+
+    .hero p{
+      font-size:18px;
+      color:#e5e7eb;
+    }
+
+    /* MUSIC SECTION */
+    .container{
+      padding:40px 20px;
+    }
+
+    .section-title{
+      font-size:30px;
+      margin-bottom:25px;
+      color:#38bdf8;
+    }
+
+    .music-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .music-card{
+      background:#1e293b;
+      border-radius:15px;
+      overflow:hidden;
+      transition:0.3s;
+      box-shadow:0 5px 15px rgba(0,0,0,0.4);
+    }
+
+    .music-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .music-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .music-info{
+      padding:18px;
+    }
+
+    .music-info h3{
+      margin-bottom:10px;
+      font-size:22px;
+    }
+
+    .artist{
+      color:#94a3b8;
+      margin-bottom:15px;
+    }
+
+    .play-btn{
+      display:inline-block;
+      padding:10px 18px;
+      background:#38bdf8;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      transition:0.3s;
+    }
+
+    .play-btn:hover{
+      background:#0ea5e9;
+    }
+
+    footer{
+      text-align:center;
+      padding:20px;
+      background:#111827;
+      margin-top:40px;
+      color:#94a3b8;
+    }
+
+    @media(max-width:600px){
+      .hero h1{
+        font-size:35px;
+      }
+
+      .search-box input{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">MusicHub</div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search songs or artists...">
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Discover Music</h1>
+    <p>Search your favorite songs and artists anytime</p>
+  </section>
+
+  <!-- MUSIC LIST -->
+  <section class="container">
+    <h2 class="section-title">Popular Songs</h2>
+
+    <div class="music-grid" id="musicGrid">
+
+      <!-- CARD 1 -->
+<div class="music-card">
+  <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop" alt="music">
+
+  <div class="music-info">
+    <h3>DJ BYRON</h3>
+    <p class="artist">DJ BYRON</p>
+
+    <!-- AUDIO PLAYER -->
+    <audio id="mixSong" controls>
+      <source src="mix.mp3" type="audio/mp3">
+      Your browser does not support audio.
+    </audio>
+
+    <br><br>
+
+    <!-- PLAY BUTTON -->
+    <button class="play-btn"
+      onclick="document.getElementById('mixSong').play()">
+      Play Song
+    </button>
+  </div>
+</div>
+
+
+<!-- CARD 2 -->
+<div class="music-card">
+  <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop" alt="music">
+
+  <div class="music-info">
+    <h3>DJ F2</h3>
+    <p class="artist">DJ F2</p>
+
+    <!-- AUDIO PLAYER -->
+    <audio id="TrapSong" controls>
+      <source src="Trap.mp3" type="audio/mp3">
+    </audio>
+
+    <br><br>
+
+    <!-- PLAY BUTTON -->
+    <button class="play-btn"
+      onclick="document.getElementById('TrapSong').play()">
+      Play Song
+    </button>
+  </div>
+</div>
+
+
+<!-- CARD 3 -->
+<div class="music-card">
+  <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop" alt="music">
+
+  <div class="music-info">
+    <h3>BEST VYBZ KARTEL AND KONSHENS</h3>
+    <p class="artist">Vybz Kartel</p>
+
+    <!-- AUDIO PLAYER -->
+    <audio id="vybzSong" controls>
+      <source src="Vybz.mp3" type="audio/mp3">
+    </audio>
+
+    <br><br>
+
+    <!-- PLAY BUTTON -->
+    <button class="play-btn"
+      onclick="document.getElementById('vybzSong').play()">
+      Play Song
+    </button>
+  </div>
+</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 MusicHub | Designed with HTML & CSS</p>
+  </footer>
+
+  <!-- SEARCH SCRIPT -->
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const musicCards = document.querySelectorAll(".music-card");
+
+    searchInput.addEventListener("keyup", function() {
+
+      const searchValue = searchInput.value.toLowerCase();
+
+      musicCards.forEach(card => {
+
+        const song =
+          card.querySelector("h3").textContent.toLowerCase();
+
+        const artist =
+          card.querySelector(".artist").textContent.toLowerCase();
+
+        if (
+          song.includes(searchValue) ||
+          artist.includes(searchValue)
+        ) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+    });
+  </script>
+
+</body>
+</html>
