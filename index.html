@@ -2,284 +2,629 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MusicHub</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>MusicHub Entertainment</title>
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, 'Segoe UI', 'Arial', sans-serif;
     }
 
-    body{
-      background:#0f172a;
-      color:white;
+    body {
+      background: #0b1120;
+      color: #f1f5f9;
+      scroll-behavior: smooth;
     }
 
-    /* HEADER */
-    header{
-      background:#111827;
-      padding:20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      position:sticky;
-      top:0;
+    /* Header */
+    header {
+      background: rgba(17, 24, 39, 0.92);
+      backdrop-filter: blur(12px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
     }
 
-    .logo{
-      font-size:28px;
-      font-weight:bold;
-      color:#38bdf8;
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
     }
 
-    .search-box{
-      margin-top:10px;
+    .search-box input {
+      padding: 0.75rem 1.2rem;
+      width: 280px;
+      border: none;
+      border-radius: 60px;
+      background: #1e293b;
+      color: white;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.25s;
+      border: 1px solid #334155;
     }
 
-    .search-box input{
-      padding:12px;
-      width:280px;
-      border:none;
-      border-radius:8px;
-      outline:none;
-      font-size:16px;
+    .search-box input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+      background: #0f172a;
     }
 
-    /* HERO SECTION */
-    .hero{
-      text-align:center;
-      padding:60px 20px;
-      background:linear-gradient(to right,#1e3a8a,#2563eb);
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(145deg, #0f172a, #0b1120);
+      border-bottom: 1px solid #1e293b;
     }
 
-    .hero h1{
-      font-size:48px;
-      margin-bottom:15px;
+    .hero h1 {
+      font-size: 3rem;
+      background: linear-gradient(135deg, #e0f2fe, #38bdf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.75rem;
     }
 
-    .hero p{
-      font-size:18px;
-      color:#e5e7eb;
+    .hero p {
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    /* MUSIC SECTION */
-    .container{
-      padding:40px 20px;
+    /* Main container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
     }
 
-    .section-title{
-      font-size:30px;
-      margin-bottom:25px;
-      color:#38bdf8;
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.3px;
+      border-left: 5px solid #38bdf8;
+      padding-left: 1rem;
     }
 
-    .music-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:25px;
+    /* Music grid - clean & responsive */
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
     }
 
-    .music-card{
-      background:#1e293b;
-      border-radius:15px;
-      overflow:hidden;
-      transition:0.3s;
-      box-shadow:0 5px 15px rgba(0,0,0,0.4);
+    /* CARD design */
+    .music-card {
+      background: #111827;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 0.25s ease-in-out;
+      box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #1f2a3e;
     }
 
-    .music-card:hover{
-      transform:translateY(-8px);
+    .music-card:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+      box-shadow: 0 20px 30px -12px rgba(56, 189, 248, 0.2);
     }
 
-    .music-card img{
-      width:100%;
-      height:220px;
-      object-fit:cover;
+    .music-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      background: #0f172a;
+      transition: transform 0.4s;
     }
 
-    .music-info{
-      padding:18px;
+    .music-card:hover img {
+      transform: scale(1.02);
     }
 
-    .music-info h3{
-      margin-bottom:10px;
-      font-size:22px;
+    .music-info {
+      padding: 1.2rem 1.2rem 1.3rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    .artist{
-      color:#94a3b8;
-      margin-bottom:15px;
+    .music-info h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+      color: #facc15;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    .play-btn{
-      display:inline-block;
-      padding:10px 18px;
-      background:#38bdf8;
-      color:white;
-      text-decoration:none;
-      border-radius:8px;
-      transition:0.3s;
+    .artist {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 1.2rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    .play-btn:hover{
-      background:#0ea5e9;
+    audio {
+      width: 100%;
+      margin: 0.5rem 0 1rem 0;
+      border-radius: 40px;
+      height: 40px;
     }
 
-    footer{
-      text-align:center;
-      padding:20px;
-      background:#111827;
-      margin-top:40px;
-      color:#94a3b8;
+    audio::-webkit-media-controls-panel {
+      background-color: white;
     }
 
-    @media(max-width:600px){
-      .hero h1{
-        font-size:35px;
+    .play-btn {
+      background: #38bdf8;
+      border: none;
+      padding: 10px 0;
+      font-weight: 600;
+      border-radius: 40px;
+      color: #0f172a;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.5rem;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+    }
+
+    .play-btn:hover {
+      background: #0ea5e9;
+      transform: scale(0.98);
+      color: white;
+    }
+
+    /* Pagination container */
+    .pagination-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0 1rem;
+      flex-wrap: wrap;
+    }
+
+    .pagination-btn {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pagination-btn:not(:disabled):hover {
+      background: #38bdf8;
+      color: #0f172a;
+      transform: translateY(-2px);
+    }
+
+    .pagination-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .page-info {
+      background: #0f172a;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid #334155;
+    }
+
+    .no-result {
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 3rem;
+      background: #111827;
+      border-radius: 2rem;
+      color: #94a3b8;
+      grid-column: 1 / -1;
+    }
+
+    footer {
+      background: #030712;
+      text-align: center;
+      padding: 1.5rem;
+      color: #6b7280;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      border-top: 1px solid #1e293b;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.5rem;
       }
-
-      .search-box input{
-        width:100%;
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .search-box input {
+        width: 100%;
+      }
+      header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .music-grid {
+        gap: 1.2rem;
       }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">MusicHub</div>
-
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search songs or artists...">
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Discover Music</h1>
-    <p>Search your favorite songs and artists anytime</p>
-  </section>
-
-  <!-- MUSIC LIST -->
-  <section class="container">
-    <h2 class="section-title">Popular Songs</h2>
-
-    <div class="music-grid" id="musicGrid">
-
-      <!-- CARD 1 -->
-<div class="music-card">
-  <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop" alt="music">
-
-  <div class="music-info">
-    <h3>DJ BYRON</h3>
-    <p class="artist">DJ BYRON</p>
-
-    <!-- AUDIO PLAYER -->
-    <audio id="mixSong" controls>
-      <source src="mix.mp3" type="audio/mp3">
-      Your browser does not support audio.
-    </audio>
-
-    <br><br>
-
-    <!-- PLAY BUTTON -->
-    <button class="play-btn"
-      onclick="document.getElementById('mixSong').play()">
-      Play Song
-    </button>
+<header>
+  <div class="logo">🎧 MusicHub · WaveGrid</div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search by song or artist...">
   </div>
-</div>
+</header>
 
-
-<!-- CARD 2 -->
-<div class="music-card">
-  <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop" alt="music">
-
-  <div class="music-info">
-    <h3>DJ F2</h3>
-    <p class="artist">DJ F2</p>
-
-    <!-- AUDIO PLAYER -->
-    <audio id="TrapSong" controls>
-      <source src="Trap.mp3" type="audio/mp3">
-    </audio>
-
-    <br><br>
-
-    <!-- PLAY BUTTON -->
-    <button class="play-btn"
-      onclick="document.getElementById('TrapSong').play()">
-      Play Song
-    </button>
+<section class="container">
+  <h2 class="section-title">✨ Popular Songs</h2>
+  <div id="musicGrid" class="music-grid">
+    <!-- dynamic cards will be injected here -->
   </div>
-</div>
 
-
-<!-- CARD 3 -->
-<div class="music-card">
-  <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop" alt="music">
-
-  <div class="music-info">
-    <h3>BEST VYBZ KARTEL AND KONSHENS</h3>
-    <p class="artist">Vybz Kartel</p>
-
-    <!-- AUDIO PLAYER -->
-    <audio id="vybzSong" controls>
-      <source src="Vybz.mp3" type="audio/mp3">
-    </audio>
-
-    <br><br>
-
-    <!-- PLAY BUTTON -->
-    <button class="play-btn"
-      onclick="document.getElementById('vybzSong').play()">
-      Play Song
-    </button>
+  <!-- Pagination controls (visible only when needed) -->
+  <div id="paginationControls" class="pagination-wrap" style="display: none;">
+    <button id="prevPageBtn" class="pagination-btn">◀ Prev</button>
+    <span id="pageIndicator" class="page-info">Page 1 / 1</span>
+    <button id="nextPageBtn" class="pagination-btn">Next ▶</button>
   </div>
-</div>
-  </section>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 MusicHub | Designed with HTML & CSS</p>
-  </footer>
+<footer>
+  <p>© 2026 MusicHub | Montie Carmon</p>
+</footer>
 
-  <!-- SEARCH SCRIPT -->
-  <script>
-    const searchInput = document.getElementById("searchInput");
-    const musicCards = document.querySelectorAll(".music-card");
+<script>
+  // ---------- SONG DATABASE (6 tracks, fully editable) ----------
+ const songsDatabase = [
+  {
+    id: 1,
+    title: "2023 URBANIZED PARTY MIX",
+    artist: "DJ BYRON WORLDWIDE ft. Sia, J. Bieber, J. Derulo, Ed Sheeran",
+    image: "https://i.pinimg.com/1200x/91/b4/3d/91b43d7e0f81cdfbd738dafd21baa6bd.jpg",
+    audioSrc: "https://drive.google.com/uc?export=download&id=1fzFmmQcpjgpIQ3EpcfahDt0DnodjysVO",
+    audioType: "audio/mpeg"
+  },
 
-    searchInput.addEventListener("keyup", function() {
+  
+   {
+      id: 2,
+      title: "DJ F2 · Urban RNB Mix",
+      artist: "DJ F2 ft. Justin Bieber, Khalid, Anne Marie, Chris Brown, Cardi B",
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop",
+      audioSrc: "https://kqt3lj29nh5xab8n.public.blob.vercel-storage.com/DJ_F2_URBAN_RNB_POP_KIZOMBA_VIDEO_MIX_FT_JUSTIN_BIEBER%2C_KHALID%2C_ANNE_MARIE%2C_CHRIS_BROWN%2C_CARDI_B%28128k%29.m4a",
+      audioType: "audio/mp4"
+    },
+    {
+      id: 3,
+      title: "BEST OF VYBZ KARTEL & KONSHENS",
+      artist: "Vybz Kartel, Konshens, Spice · Dancehall Energy",
+      image: "https://i.pinimg.com/1200x/3f/8c/83/3f8c831b1d515cee268437e9f25863ac.jpg",
+      audioSrc: "https://res.cloudinary.com/dsedfuptl/video/upload/v1778192720/Best_Of_Vybz_Kartel_Mix_-_Dj_Trez___Rvssian__Spice__Konshens__fever_128k_ppxmf6.mp3",
+      audioType: "audio/mpeg"
+    },
+    {
+      id: 4,
+      title: "URBAN TRAP · HIPHOP ENERGY",
+      artist: "Migos, Drake, Gunna, J. Cole · Best Mix",
+      image: "https://i.pinimg.com/736x/7a/f3/30/7af330c9d6ea0a0973bc956d5fc43c0c.jpg",
+      audioSrc: "https://res.cloudinary.com/dsedfuptl/video/upload/v1778193816/URBAN_TRAP___RAP___HIPHOP__VIDEO_MIX____MCE__16_WITH_DJ_MOON_FT._-_DRAKE___J_COLE___GUNNA___MIGOS_128k_czoad2.mp3",
+      audioType: "audio/mpeg"
+    },
+    {
+      id: 5,
+      title: "MOST PLAYED URBAN POP",
+      artist: "French Montana, Swae Lee, Sean Paul, Major Lazer",
+      image: "https://i.pinimg.com/1200x/dc/64/bd/dc64bdc69803e2a62e5eaf8d1d44e558.jpg",
+      audioSrc: "https://res.cloudinary.com/dsedfuptl/video/upload/v1778227696/_MOST_PLAYED_2015-2021_URBAN_POP_MIX_2026___VDJ_SARJENT_SEAN_PAUL_MAJOR_LAZER__JUSTIN_BIEBER_SIA_48k_1_wkzxzo.mp3",
+      audioType: "audio/mpeg"
+    },
+    {
+      id: 6,
+      title: "3-STEP MIX · AMAPIANO WAVE",
+      artist: "Jazzworld · Afro Tech, Bengicela, Mali, Isaka",
+      image: "https://i.pinimg.com/1200x/78/6f/84/786f849c35f124d10710142d1f3dfad4.jpg",
+      audioSrc: "https://res.cloudinary.com/dsedfuptl/video/upload/v1778227658/3_Step_Afro_Tech_Mix___Bengicela___Tholokuthi___Mali___uMA_weNGANE___Uzizwa_Kanjan___Isaka___Hurshy_48k_y5n1x3.mp3",
+      audioType: "audio/mpeg"
+    },
+    {
+      id: 7,
+      title: "LATEST DANCEHALL MIX",
+      artist: "Moliy, Vybz Kartel, Shenseea",
+      image: "https://i.pinimg.com/736x/a5/60/79/a56079c946649a27c96f062bd302a779.jpg",
+      audioSrc: "https://res.cloudinary.com/dsedfuptl/video/upload/v1778227732/_LATEST_DANCEHALL_RIDDIMS_VIDEO_MIX_2026___VDJ_SARJENT_VYBZ_KARTEL_KONSHENS_MOLLY_SKENG_RAJAHWILD_48k_1_hc9wsy.mp3",
+      audioType: "audio/mpeg"
+    },
+    {
+      id: 8,
+      title: "DAGGERING MIX",
+      artist: "Vybz Kartel, Konshens, Demarco",
+      image: "https://i.pinimg.com/1200x/d4/36/3d/d4363dfc6ff0b2a277fe1b10c5f9fcee.jpg",
+      audioSrc: "https://res.cloudinary.com/dsedfuptl/video/upload/v1778227793/DAGGERING_MIX___SHAKE_IT_TO_THE_MAX__FEVER_DANCEHALL_MIX_2025___ELI_ROSH_FT_VYBZ__KONSHENS__1_qadcn7.mp3",
+      audioType: "auhttps://drive.google.com/uc?export=download&id=1fzFmmQcpjgpIQ3EpcfahDt0DnodjysVOdio/mpeg"
+    },
+     {
+      id: 9,
+      title: "BEST CLUB BANGERS MIX 2025 DJ CARLOS ",
+      artist: "Toxic Lyrikali, Vybz Kartel, Konshens, Demarco",
+      image: "https://i.pinimg.com/736x/ae/6f/63/ae6f632430edba4fff8e0999518ff742.jpg",
+      audioSrc: "https://res.cloudinary.com/dsedfuptl/video/upload/v1778231696/BEST_CLUB_BANGERS_2025_VIDEO_MIX_TOXIC_LYRICAL_IYANII_VYBZ_KARTEL_DUFLA_KONSHENS_WAKADINALI_TRENDING_48k_1_nnkdcs.mp3",
+      audioType: "audio/mpeg"
+    },
+     {
+      id: 10,
+      title: "TRAP HIPHOP DJ SETRIN",
+      artist: "Drake, Migos, Cardi B",
+      image: "https://i.pinimg.com/1200x/0c/f0/fa/0cf0faeec908b0ed998096f422f6e325.jpg",
+      audioSrc: "https://res.cloudinary.com/dsedfuptl/video/upload/v1778230187/TRAP___HIPHOP_OFFICIAL_VIDEO_MIX_-_VJ_SETRIN_X_DJ_SMARTIX_FT_1_y7lycj.mp3",
+      audioType: "audio/mpeg"
+    },
+     {
+      id: 11,
+      title: "FRESHKID FT MC MIDOO",
+      artist: "Best Kenyan hits and latest hits",
+      image: "https://i.pinimg.com/1200x/a7/19/81/a71981dc04cee46c8b8efbb2cb794417.jpg",
+      audioSrc: "https://res.cloudinary.com/dsedfuptl/video/upload/v1778230232/FRESHKID_VENOM_ft_MC_MIDO_LIVE___COVO254___1_bi7u5x.mp3",
+      audioType: "audio/mpeg"
+    },
+    
+  ];
 
-      const searchValue = searchInput.value.toLowerCase();
+  // ---------- GLOBALS ----------
+  let currentPage = 1;
+  const ITEMS_PER_PAGE = 4;     // neat grid, avoid clutter
+  let filteredSongs = [...songsDatabase];   // start with full catalog
+  let searchTerm = "";
 
-      musicCards.forEach(card => {
+  // DOM elements
+  const musicGridContainer = document.getElementById("musicGrid");
+  const searchInput = document.getElementById("searchInput");
+  const paginationWrapper = document.getElementById("paginationControls");
+  const prevBtn = document.getElementById("prevPageBtn");
+  const nextBtn = document.getElementById("nextPageBtn");
+  const pageIndicator = document.getElementById("pageIndicator");
 
-        const song =
-          card.querySelector("h3").textContent.toLowerCase();
-
-        const artist =
-          card.querySelector(".artist").textContent.toLowerCase();
-
-        if (
-          song.includes(searchValue) ||
-          artist.includes(searchValue)
-        ) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-
-      });
-
+  // Helper: pause all audio elements except the current one
+  function pauseAllOtherAudios(currentAudioElement) {
+    const allAudios = document.querySelectorAll('.song-audio');
+    allAudios.forEach(audio => {
+      if (audio !== currentAudioElement && !audio.paused) {
+        audio.pause();
+      }
     });
-  </script>
+  }
 
+  // attach event handlers to every audio and every play button after render
+  function attachMediaEvents() {
+    // 1) Audio elements: when one starts playing, pause all others
+    const allAudioElements = document.querySelectorAll('.song-audio');
+    allAudioElements.forEach(audioEl => {
+      // remove possible old listeners to avoid duplicates, but we replace grid each render, so safe fresh.
+      audioEl.removeEventListener('play', audioEl._playHandler);
+      const playHandler = function() {
+        pauseAllOtherAudios(this);
+      };
+      audioEl.addEventListener('play', playHandler);
+      audioEl._playHandler = playHandler;
+    });
+
+    // 2) Custom "Play Song" buttons: trigger play on sibling/previously found audio
+    const playButtons = document.querySelectorAll('.play-btn');
+    playButtons.forEach(btn => {
+      btn.removeEventListener('click', btn._clickHandler);
+      const clickHandler = function(e) {
+        const card = this.closest('.music-card');
+        if (card) {
+          const targetAudio = card.querySelector('.song-audio');
+          if (targetAudio) {
+            pauseAllOtherAudios(targetAudio);
+            targetAudio.play().catch(err => {
+              console.warn("Playback error:", err);
+              // optional silent fail — allow user interaction
+            });
+          }
+        }
+      };
+      btn.addEventListener('click', clickHandler);
+      btn._clickHandler = clickHandler;
+    });
+  }
+
+  // Render cards based on array (sliced for current page)
+  function renderCards(songsToDisplay) {
+    if (!musicGridContainer) return;
+    
+    if (songsToDisplay.length === 0) {
+      musicGridContainer.innerHTML = `<div class="no-result">🎵 No matching tracks found. Try another keyword.</div>`;
+      paginationWrapper.style.display = "none";
+      return;
+    }
+    
+    // build HTML cards
+    let cardsHTML = "";
+    for (const song of songsToDisplay) {
+      cardsHTML += `
+        <div class="music-card">
+          <img src="${song.image}" alt="${escapeHtml(song.title)}" loading="lazy">
+          <div class="music-info">
+            <h3>${escapeHtml(song.title)}</h3>
+            <p class="artist">${escapeHtml(song.artist)}</p>
+            <audio controls preload="metadata" class="song-audio">
+              <source src="${song.audioSrc}" type="${song.audioType}">
+              Your browser does not support the audio element.
+            </audio>
+            <button class="play-btn">▶ Play Song</button>
+          </div>
+        </div>
+      `;
+    }
+    musicGridContainer.innerHTML = cardsHTML;
+    // after DOM injection, reattach events for proper "one audio at a time"
+    attachMediaEvents();
+  }
+
+  // simple XSS prevention
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  // update pagination UI and show/hide controls
+  function updatePaginationUI() {
+    const totalPages = Math.ceil(filteredSongs.length / ITEMS_PER_PAGE);
+    if (totalPages <= 1) {
+      paginationWrapper.style.display = "none";
+      return;
+    }
+    paginationWrapper.style.display = "flex";
+    pageIndicator.innerText = `Page ${currentPage} / ${totalPages}`;
+    
+    // enable/disable buttons
+    if (prevBtn) prevBtn.disabled = (currentPage === 1);
+    if (nextBtn) nextBtn.disabled = (currentPage === totalPages);
+  }
+  
+  // core function: filter + paginate + render
+  function applyFilterAndPagination() {
+    // 1) filter based on searchTerm (case-insensitive)
+    if (!searchTerm.trim()) {
+      filteredSongs = [...songsDatabase];
+    } else {
+      const termLower = searchTerm.trim().toLowerCase();
+      filteredSongs = songsDatabase.filter(song => 
+        song.title.toLowerCase().includes(termLower) || 
+        song.artist.toLowerCase().includes(termLower)
+      );
+    }
+    
+    // 2) adjust currentPage if it exceeds total pages after filtering
+    const totalPages = Math.ceil(filteredSongs.length / ITEMS_PER_PAGE);
+    if (totalPages === 0) {
+      currentPage = 1;
+    } else if (currentPage > totalPages) {
+      currentPage = totalPages;
+    } else if (currentPage < 1) {
+      currentPage = 1;
+    }
+    
+    // 3) get slice for current page
+    const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIdx = startIdx + ITEMS_PER_PAGE;
+    const pageSongs = filteredSongs.slice(startIdx, endIdx);
+    
+    // 4) render
+    renderCards(pageSongs);
+    updatePaginationUI();
+  }
+  
+  // reset to page 1 on new search (call after search updates)
+  function handleSearch() {
+    searchTerm = searchInput.value;
+    currentPage = 1;   // always reset pagination when search changes
+    applyFilterAndPagination();
+  }
+  
+  // pagination navigation
+  function goPrevPage() {
+    if (currentPage > 1) {
+      currentPage--;
+      applyFilterAndPagination();
+      // smooth scroll to top of music grid for UX
+      document.querySelector('.section-title')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  
+  function goNextPage() {
+    const totalPages = Math.ceil(filteredSongs.length / ITEMS_PER_PAGE);
+    if (currentPage < totalPages) {
+      currentPage++;
+      applyFilterAndPagination();
+      document.querySelector('.section-title')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  
+  // optional: ensure that after playing audio, no other remains; also handle dynamic event duplication resistance
+  // already done in attachMediaEvents.
+  
+  // Additional neatness: global one-audio guarantee also if user clicks play manually
+  // we also cover audio 'play' event globally, which ensures all dynamic cards respect the rule.
+  
+  // ---------- INITIALIZE AND EVENT LISTENERS ----------
+  function init() {
+    // initial render: all songs, page 1
+    filteredSongs = [...songsDatabase];
+    currentPage = 1;
+    applyFilterAndPagination();
+    
+    // search listener
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        searchTerm = e.target.value;
+        currentPage = 1;
+        applyFilterAndPagination();
+      });
+    }
+    
+    // pagination button listeners
+    if (prevBtn) prevBtn.addEventListener("click", goPrevPage);
+    if (nextBtn) nextBtn.addEventListener("click", goNextPage);
+  }
+  
+  // start application
+  init();
+  
+  // (Bonus) Graceful handling: when any audio ends, no side effect needed.
+  // Also ensures that if there are many more songs in future (e.g., 20 tracks), 
+  // pagination keeps UI clean. Search and pagination fully decoupled.
+</script>
 </body>
 </html>
